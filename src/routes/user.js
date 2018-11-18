@@ -83,6 +83,7 @@ router.post('/send_code', function(req, res, next) {
   }
   return VerificationCode.getByPhone(region, phone).then(function(verification) {
     var code, subtraction, timeDiff;
+    console.log('code in 86 = '+code)
     if (verification) {
       timeDiff = Math.floor((Date.now() - verification.updatedAt.getTime()) / 1000);
       if (req.app.get('env') === 'development') {
@@ -95,6 +96,7 @@ router.post('/send_code', function(req, res, next) {
       }
     }
     code = _.random(1000, 9999);
+    console.log('code in 99 = '+code)
     if (req.app.get('env') === 'development') {
       return VerificationCode.upsert({
         region: region,
